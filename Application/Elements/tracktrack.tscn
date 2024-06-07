@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://cr76lpyy6v3bp"]
+
+[ext_resource type="Script" path="res://Application/Elements/tracktrack.gd" id="1_n81al"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1kwfs"]
+bg_color = Color(1, 1, 1, 1)
+
+[node name="tracktrack" type="PanelContainer"]
+custom_minimum_size = Vector2(0, 45)
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_1kwfs")
+script = ExtResource("1_n81al")
+
+[node name="keyframes" type="Control" parent="."]
+layout_mode = 2
+mouse_filter = 1
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

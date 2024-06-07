@@ -1,0 +1,258 @@
+[gd_scene load_steps=14 format=3 uid="uid://8nij04dn7isl"]
+
+[ext_resource type="FontFile" uid="uid://b8m80it0fjkoc" path="res://Assets/Fonts/white_rabbit/whitrabt.ttf" id="1_x3rm3"]
+[ext_resource type="Script" path="res://Application/Elements/timeline.gd" id="2_huee5"]
+[ext_resource type="Shader" path="res://Application/Elements/trackback.gdshader" id="2_qri8w"]
+[ext_resource type="Script" path="res://Application/Elements/Playhead.gd" id="4_4g283"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aevu5"]
+content_margin_left = 5.0
+content_margin_top = 2.0
+content_margin_right = 5.0
+content_margin_bottom = 2.0
+bg_color = Color(0.133333, 0.133333, 0.133333, 1)
+
+[sub_resource type="Theme" id="Theme_k2dgv"]
+default_font = ExtResource("1_x3rm3")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_aevu5")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m532y"]
+shader = ExtResource("2_qri8w")
+shader_parameter/cell_size = 16.0
+shader_parameter/dot_size = 0.25
+shader_parameter/background_color = Color(0.168627, 0.168627, 0.168627, 1)
+shader_parameter/dot_color = Color(0.258824, 0.258824, 0.258824, 1)
+shader_parameter/resolution = Vector2(1024, 576)
+shader_parameter/offset = null
+shader_parameter/anti_aliasing_factor = 0.01
+shader_parameter/stochastic_samples = 16
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_x4dmg"]
+color = Color(1, 0.270588, 0, 1)
+thickness = 3
+vertical = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4nx5o"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.133333, 0.133333, 0.133333, 1)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_378jp"]
+color = Color(0.482353, 0.407843, 0.933333, 1)
+thickness = 3
+vertical = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xwdsp"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 3.0
+bg_color = Color(0.482353, 0.407843, 0.933333, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dtinc"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 3.0
+bg_color = Color(0.482353, 0.407843, 0.933333, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jgwfx"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 3.0
+bg_color = Color(0.376471, 0.258824, 0.823529, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[node name="Timeline" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_k2dgv")
+script = ExtResource("2_huee5")
+
+[node name="Background" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_m532y")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="tlsc" type="ScrollContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 3
+
+[node name="Line" type="PanelContainer" parent="VBoxContainer/tlsc"]
+custom_minimum_size = Vector2(512, 30)
+layout_mode = 2
+
+[node name="timepointlist" type="HBoxContainer" parent="VBoxContainer/tlsc/Line"]
+layout_mode = 2
+
+[node name="timepoint" type="RichTextLabel" parent="VBoxContainer/tlsc/Line/timepointlist"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_colors/default_color = Color(0.713726, 0.713726, 0.713726, 1)
+text = "0"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+follow_focus = true
+
+[node name="List" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
+layout_mode = 2
+
+[node name="TimelineOptions" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Zoom" type="HBoxContainer" parent="VBoxContainer/TimelineOptions"]
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+alignment = 2
+
+[node name="ZoomOUT" type="Button" parent="VBoxContainer/TimelineOptions/Zoom"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+size_flags_vertical = 5
+theme_override_font_sizes/font_size = 10
+text = "-"
+
+[node name="zoomLabel" type="RichTextLabel" parent="VBoxContainer/TimelineOptions/Zoom"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_colors/default_color = Color(0.713726, 0.713726, 0.713726, 1)
+text = "1x"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="ZoomIN" type="Button" parent="VBoxContainer/TimelineOptions/Zoom"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+size_flags_vertical = 5
+theme_override_font_sizes/font_size = 10
+text = "+"
+
+[node name="AnimLength" type="HBoxContainer" parent="VBoxContainer/TimelineOptions"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 15
+
+[node name="AnimLengthLabel" type="RichTextLabel" parent="VBoxContainer/TimelineOptions/AnimLength"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_colors/default_color = Color(0.713726, 0.713726, 0.713726, 1)
+text = "Cycle Length"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="LengthSet" type="SpinBox" parent="VBoxContainer/TimelineOptions/AnimLength"]
+layout_mode = 2
+size_flags_vertical = 4
+step = 0.1
+value = 1.0
+suffix = "s"
+
+[node name="Tracker" type="Panel" parent="."]
+custom_minimum_size = Vector2(3, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -1.5
+offset_right = 1.5
+offset_bottom = 546.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxLine_x4dmg")
+
+[node name="pc" type="PanelContainer" parent="Tracker"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 4.0
+offset_right = 28.0
+offset_bottom = 27.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_4nx5o")
+
+[node name="timepoint" type="RichTextLabel" parent="Tracker/pc"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_colors/default_color = Color(1, 0.270588, 0, 1)
+text = "0"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="Playhead" type="Panel" parent="."]
+custom_minimum_size = Vector2(3, 0)
+layout_mode = 0
+offset_right = 3.0
+offset_bottom = 546.0
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxLine_378jp")
+script = ExtResource("4_4g283")
+
+[node name="grabber" type="Button" parent="Playhead"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -19.0
+offset_top = 24.0
+offset_right = 19.0
+offset_bottom = 47.0
+grow_horizontal = 2
+mouse_filter = 1
+theme_override_colors/font_color = Color(0.168627, 0.168627, 0.168627, 1)
+theme_override_colors/font_pressed_color = Color(0.168627, 0.168627, 0.168627, 1)
+theme_override_colors/font_hover_color = Color(0.168627, 0.168627, 0.168627, 1)
+theme_override_colors/font_focus_color = Color(0.168627, 0.168627, 0.168627, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_xwdsp")
+theme_override_styles/hover = SubResource("StyleBoxFlat_dtinc")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_jgwfx")
+theme_override_styles/focus = SubResource("StyleBoxFlat_xwdsp")
+text = "///"
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="resized" from="." to="." method="_on_resized"]
+[connection signal="pressed" from="VBoxContainer/TimelineOptions/Zoom/ZoomOUT" to="." method="_on_zoom_out_pressed"]
+[connection signal="pressed" from="VBoxContainer/TimelineOptions/Zoom/ZoomIN" to="." method="_on_zoom_in_pressed"]
+[connection signal="value_changed" from="VBoxContainer/TimelineOptions/AnimLength/LengthSet" to="." method="_on_length_set_value_changed"]
+[connection signal="button_down" from="Playhead/grabber" to="Playhead" method="_on_grabber_button_down"]
+[connection signal="button_up" from="Playhead/grabber" to="Playhead" method="_on_grabber_button_up"]

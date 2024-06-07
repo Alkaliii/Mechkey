@@ -1,0 +1,13 @@
+res://Application/Elements/tracklabel.tscn
+res://Application/Elements/trackback.gdshader
+res://Application/Elements/workspace.tscn
+res://Application/main.tscn
+res://Application/Elements/timeline.tscn
+res://Application/Elements/timeline.gd
+res://Application/Elements/tracktrack.tscn
+res://Application/Elements/tracktrack.gd
+res://Application/Elements/keyframe.tscn
+res://Application/Elements/keyframe.gd
+res://Application/Elements/workspace.gd
+res://Application/m_gsb.gd
+res://Application/Elements/Playhead.gd

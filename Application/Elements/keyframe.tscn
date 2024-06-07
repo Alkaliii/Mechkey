@@ -1,0 +1,155 @@
+[gd_scene load_steps=6 format=3 uid="uid://c4q2kaadu6yjb"]
+
+[ext_resource type="FontFile" uid="uid://b8m80it0fjkoc" path="res://Assets/Fonts/white_rabbit/whitrabt.ttf" id="1_vfihc"]
+[ext_resource type="Script" path="res://Application/Elements/keyframe.gd" id="2_lxbg2"]
+
+[sub_resource type="Theme" id="Theme_oatun"]
+default_font = ExtResource("1_vfihc")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dt8go"]
+bg_color = Color(1, 0.270588, 0, 1)
+corner_radius_top_left = 90
+corner_radius_top_right = 90
+corner_radius_bottom_right = 90
+corner_radius_bottom_left = 90
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wbwuv"]
+content_margin_left = 7.0
+content_margin_top = 7.0
+content_margin_right = 7.0
+content_margin_bottom = 7.0
+bg_color = Color(0.0862745, 0.0862745, 0.0862745, 1)
+
+[node name="KEYFRAME" type="Control"]
+custom_minimum_size = Vector2(14, 14)
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -7.0
+offset_top = -7.0
+offset_right = 7.0
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(7, 7)
+mouse_filter = 1
+theme = SubResource("Theme_oatun")
+script = ExtResource("2_lxbg2")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_dt8go")
+
+[node name="Options" type="PanelContainer" parent="."]
+top_level = true
+layout_mode = 0
+offset_left = 20.0
+offset_right = 162.0
+offset_bottom = 116.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_wbwuv")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Options"]
+layout_mode = 2
+
+[node name="position" type="RichTextLabel" parent="Options/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_colors/default_color = Color(0.713726, 0.713726, 0.713726, 1)
+theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/bold_font_size = 12
+theme_override_font_sizes/italics_font_size = 12
+theme_override_font_sizes/bold_italics_font_size = 12
+theme_override_font_sizes/mono_font_size = 12
+text = "t:0.5"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="Value" type="HBoxContainer" parent="Options/VBoxContainer"]
+layout_mode = 2
+
+[node name="keyValue" type="RichTextLabel" parent="Options/VBoxContainer/Value"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_colors/default_color = Color(0.713726, 0.713726, 0.713726, 1)
+text = "Value: "
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="valueset" type="SpinBox" parent="Options/VBoxContainer/Value"]
+layout_mode = 2
+size_flags_vertical = 4
+min_value = -92.5
+max_value = 92.5
+step = 0.1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Options/VBoxContainer"]
+layout_mode = 2
+
+[node name="Copy" type="Button" parent="Options/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Copy"
+
+[node name="Cut" type="Button" parent="Options/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Cut"
+
+[node name="MoveOptions" type="HBoxContainer" parent="Options/VBoxContainer"]
+layout_mode = 2
+
+[node name="Move" type="Button" parent="Options/VBoxContainer/MoveOptions"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+text = "Move"
+alignment = 0
+
+[node name="Left" type="Button" parent="Options/VBoxContainer/MoveOptions"]
+layout_mode = 2
+text = "<"
+
+[node name="Right" type="Button" parent="Options/VBoxContainer/MoveOptions"]
+layout_mode = 2
+text = ">"
+
+[node name="Delete" type="Button" parent="Options/VBoxContainer"]
+layout_mode = 2
+text = "Delete"
+alignment = 0
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="Options"]
+position = Vector2(71.5, 62.5)
+scale = Vector2(7.15, 6.25)
+
+[node name="Click" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+flat = true
+
+[connection signal="value_changed" from="Options/VBoxContainer/Value/valueset" to="." method="_on_valueset_value_changed"]
+[connection signal="pressed" from="Options/VBoxContainer/HBoxContainer/Copy" to="." method="_on_copy_pressed"]
+[connection signal="pressed" from="Options/VBoxContainer/HBoxContainer/Cut" to="." method="_on_cut_pressed"]
+[connection signal="button_down" from="Options/VBoxContainer/MoveOptions/Move" to="." method="_on_click_button_down"]
+[connection signal="button_up" from="Options/VBoxContainer/MoveOptions/Move" to="." method="_on_click_button_up"]
+[connection signal="pressed" from="Options/VBoxContainer/MoveOptions/Left" to="." method="_on_left_pressed"]
+[connection signal="pressed" from="Options/VBoxContainer/MoveOptions/Right" to="." method="_on_right_pressed"]
+[connection signal="pressed" from="Options/VBoxContainer/Delete" to="." method="_on_delete_pressed"]
+[connection signal="screen_exited" from="Options/VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="pressed" from="Click" to="." method="_on_click_pressed"]

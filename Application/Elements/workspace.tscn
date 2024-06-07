@@ -1,0 +1,112 @@
+[gd_scene load_steps=7 format=3 uid="uid://dbm023lyd5a5y"]
+
+[ext_resource type="FontFile" uid="uid://b8m80it0fjkoc" path="res://Assets/Fonts/white_rabbit/whitrabt.ttf" id="1_6nr0i"]
+[ext_resource type="PackedScene" uid="uid://8nij04dn7isl" path="res://Application/Elements/timeline.tscn" id="1_rfq4s"]
+[ext_resource type="PackedScene" uid="uid://doknt6mmtth6i" path="res://Application/Elements/tracklabel.tscn" id="2_jihrj"]
+[ext_resource type="Script" path="res://Application/Elements/workspace.gd" id="2_rps7x"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aevu5"]
+content_margin_left = 5.0
+content_margin_top = 2.0
+content_margin_right = 5.0
+content_margin_bottom = 2.0
+bg_color = Color(0.133333, 0.133333, 0.133333, 1)
+
+[sub_resource type="Theme" id="Theme_muafr"]
+default_font = ExtResource("1_6nr0i")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_aevu5")
+
+[node name="Workspace" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_muafr")
+script = ExtResource("2_rps7x")
+
+[node name="VSplitContainer" type="VSplitContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+split_offset = 330
+
+[node name="PanelContainer" type="PanelContainer" parent="VSplitContainer"]
+layout_mode = 2
+
+[node name="PanelContainer2" type="PanelContainer" parent="VSplitContainer"]
+layout_mode = 2
+
+[node name="HSplitContainer" type="HSplitContainer" parent="VSplitContainer/PanelContainer2"]
+layout_mode = 2
+split_offset = 240
+
+[node name="TrackLabels" type="PanelContainer" parent="VSplitContainer/PanelContainer2/HSplitContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VSplitContainer/PanelContainer2/HSplitContainer/TrackLabels"]
+layout_mode = 2
+
+[node name="PlaybackControls" type="HBoxContainer" parent="VSplitContainer/PanelContainer2/HSplitContainer/TrackLabels/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+alignment = 2
+
+[node name="Reverse" type="Button" parent="VSplitContainer/PanelContainer2/HSplitContainer/TrackLabels/VBoxContainer/PlaybackControls"]
+layout_mode = 2
+text = "<<<"
+
+[node name="Pause" type="Button" parent="VSplitContainer/PanelContainer2/HSplitContainer/TrackLabels/VBoxContainer/PlaybackControls"]
+layout_mode = 2
+text = "||"
+
+[node name="Play" type="Button" parent="VSplitContainer/PanelContainer2/HSplitContainer/TrackLabels/VBoxContainer/PlaybackControls"]
+layout_mode = 2
+text = ">>>"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VSplitContainer/PanelContainer2/HSplitContainer/TrackLabels/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+vertical_scroll_mode = 3
+
+[node name="Tracks" type="VBoxContainer" parent="VSplitContainer/PanelContainer2/HSplitContainer/TrackLabels/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+
+[node name="Tracklabel" parent="VSplitContainer/PanelContainer2/HSplitContainer/TrackLabels/VBoxContainer/ScrollContainer/Tracks" instance=ExtResource("2_jihrj")]
+layout_mode = 2
+
+[node name="Tracklabel2" parent="VSplitContainer/PanelContainer2/HSplitContainer/TrackLabels/VBoxContainer/ScrollContainer/Tracks" instance=ExtResource("2_jihrj")]
+layout_mode = 2
+
+[node name="Tracklabel3" parent="VSplitContainer/PanelContainer2/HSplitContainer/TrackLabels/VBoxContainer/ScrollContainer/Tracks" instance=ExtResource("2_jihrj")]
+layout_mode = 2
+
+[node name="Tracklabel4" parent="VSplitContainer/PanelContainer2/HSplitContainer/TrackLabels/VBoxContainer/ScrollContainer/Tracks" instance=ExtResource("2_jihrj")]
+layout_mode = 2
+
+[node name="Tracklabel5" parent="VSplitContainer/PanelContainer2/HSplitContainer/TrackLabels/VBoxContainer/ScrollContainer/Tracks" instance=ExtResource("2_jihrj")]
+layout_mode = 2
+
+[node name="Tracklabel6" parent="VSplitContainer/PanelContainer2/HSplitContainer/TrackLabels/VBoxContainer/ScrollContainer/Tracks" instance=ExtResource("2_jihrj")]
+layout_mode = 2
+
+[node name="Tracklabel7" parent="VSplitContainer/PanelContainer2/HSplitContainer/TrackLabels/VBoxContainer/ScrollContainer/Tracks" instance=ExtResource("2_jihrj")]
+layout_mode = 2
+
+[node name="Tracklabel8" parent="VSplitContainer/PanelContainer2/HSplitContainer/TrackLabels/VBoxContainer/ScrollContainer/Tracks" instance=ExtResource("2_jihrj")]
+layout_mode = 2
+
+[node name="Spacer2" type="Control" parent="VSplitContainer/PanelContainer2/HSplitContainer/TrackLabels/VBoxContainer"]
+custom_minimum_size = Vector2(0, 23)
+layout_mode = 2
+
+[node name="Timeline" parent="VSplitContainer/PanelContainer2/HSplitContainer" instance=ExtResource("1_rfq4s")]
+layout_mode = 2
+
+[connection signal="pressed" from="VSplitContainer/PanelContainer2/HSplitContainer/TrackLabels/VBoxContainer/PlaybackControls/Reverse" to="." method="_on_reverse_pressed"]
+[connection signal="pressed" from="VSplitContainer/PanelContainer2/HSplitContainer/TrackLabels/VBoxContainer/PlaybackControls/Pause" to="." method="_on_pause_pressed"]
+[connection signal="pressed" from="VSplitContainer/PanelContainer2/HSplitContainer/TrackLabels/VBoxContainer/PlaybackControls/Play" to="." method="_on_play_pressed"]
