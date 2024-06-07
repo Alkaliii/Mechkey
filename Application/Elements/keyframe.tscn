@@ -7,7 +7,7 @@
 default_font = ExtResource("1_vfihc")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dt8go"]
-bg_color = Color(1, 0.270588, 0, 1)
+bg_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 90
 corner_radius_top_right = 90
 corner_radius_bottom_right = 90
@@ -92,6 +92,7 @@ size_flags_vertical = 4
 min_value = -92.5
 max_value = 92.5
 step = 0.1
+value = 0.5
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Options/VBoxContainer"]
 layout_mode = 2

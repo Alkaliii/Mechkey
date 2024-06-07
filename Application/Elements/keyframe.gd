@@ -66,6 +66,9 @@ func _on_click_pressed():
 	$Options/VBoxContainer/position.text = str("t",snapped(kfv.x,0.01))
 	click.release_focus()
 	shown = !shown
+	match shown:
+		true: create_tween().tween_property($Panel,"self_modulate",Color.ORANGE_RED,0.15)
+		false: create_tween().tween_property($Panel,"self_modulate",Color("#1b1b1b"),0.15)
 	$Options.position = global_position + Vector2(20,0)
 	$Options.visible = shown
 

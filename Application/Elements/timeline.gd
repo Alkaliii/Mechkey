@@ -150,8 +150,8 @@ func scroll(back := false):
 	if mainsc.scroll_horizontal + add >= mainsc.get_h_scroll_bar().max_value:
 		#restart
 		#create_tween().tween_property(mainsc,"scroll_horizontal",0,0.05).set_ease(Tween.EASE_IN_OUT)
-		if back: mainsc.scroll_horizontal = 0
-		else: mainsc.scroll_horizontal = mainsc.get_h_scroll_bar().max_value
+		if back: mainsc.scroll_horizontal = mainsc.get_h_scroll_bar().max_value
+		else: mainsc.scroll_horizontal = 0
 	elif back:
 		#create_tween().tween_property(mainsc,"scroll_horizontal",mainsc.scroll_horizontal + get_length(),0.05).set_ease(Tween.EASE_IN_OUT)
 		mainsc.scroll_horizontal -= add
